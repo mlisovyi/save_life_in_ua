@@ -31,4 +31,5 @@ jobs:
         find . -type f -name "*.py" | xargs pylint -E -r y
     - name: Test with pytest
       run: |
+        export PYTHONPATH=$PWD:$PYTHONPATH
         pytest
