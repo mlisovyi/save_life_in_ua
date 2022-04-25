@@ -28,7 +28,7 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with pylint
       run: |
-        find . -type f -name "*.py" | xargs pylint -E -r y
+        find save_life_in_ua -type f -name "*.py" | xargs pylint -E -r y
     - name: Test with pytest
       run: |
         export PYTHONPATH=$PWD:$PYTHONPATH
