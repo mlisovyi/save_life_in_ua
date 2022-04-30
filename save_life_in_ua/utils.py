@@ -42,7 +42,7 @@ def process_date(df: pd.DataFrame) -> pd.DataFrame:
         (df["datetime"] - ms2unix_shift_in_days) * sec_in_day, unit="s"
     )
     # some entries contain not only the date, but also the exact time (fondy.eu)
-    df["date"] = df["datetime"].dt.date
+    df["date"] = df["datetime"].dt.floor("D")
     del df["datetime"]
     return df
 
