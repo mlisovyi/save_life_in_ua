@@ -8,6 +8,7 @@ URL = "https://onedrive.live.com/download?resid=B0264747CBB7E393!16208&ithint=fi
 
 
 def download_data(fout: Path) -> None:
+    fout.parent.mkdir(exist_ok=True, parents=True)
     resp = requests.get(URL)
     with open(fout, "wb") as f:
         f.write(resp.content)
