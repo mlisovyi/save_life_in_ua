@@ -1,10 +1,15 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 from wordcloud import WordCloud
+import datetime as dt
 
 
 def add_y_grid_lines() -> None:
     plt.grid(which="major", axis="y", ls="--")
+
+
+def add_war_start_line() -> None:
+    plt.axvline(x=dt.date(2022, 2, 24), ls="--", c="k", label="Russia's invasion")
 
 
 def plot_daily_inout(s_in: pd.Series, s_out: pd.Series) -> None:
@@ -14,6 +19,7 @@ def plot_daily_inout(s_in: pd.Series, s_out: pd.Series) -> None:
     plt.xlabel("Date")
     plt.ylabel("Donations/Expenses per day, millions UAH")
     add_y_grid_lines()
+    add_war_start_line()
     plt.legend()
     plt.tight_layout()
 
@@ -29,6 +35,7 @@ def plot_cum_daily_inout(s_in: pd.Series, s_out: pd.Series) -> None:
     plt.xlabel("Date")
     plt.ylabel("Cumulative each day, millions UAH")
     add_y_grid_lines()
+    add_war_start_line()
     plt.legend()
     # bottom figure with the savings
     plt.sca(axs[1])
@@ -40,6 +47,7 @@ def plot_cum_daily_inout(s_in: pd.Series, s_out: pd.Series) -> None:
     plt.xlabel("Date")
     plt.ylabel("Savings, millions UAH")
     add_y_grid_lines()
+    add_war_start_line()
     plt.legend()
     plt.tight_layout()
 
