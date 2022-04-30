@@ -67,3 +67,18 @@ def process_type_of_expenses(s: pd.Series) -> pd.DataFrame:
 def get_term_counts(s: pd.Series) -> pd.Series:
     s_out = s.value_counts()
     return s_out
+
+
+def get_top_N_donations(df: pd.DataFrame) -> pd.DataFrame:
+    col_m_uah = "amount, millions UAH"
+    # the very first entry from 2021-12-31 is the aggregate over the last 8 years
+    mask = df["date"] >= pd.to_datetime("2022-01-01")
+    df_out = (
+        df[mask]
+        .nlargest(20, columns="amount")
+        .reset_index(drop=True)
+        .assign(**{col_m_uah: (lambda x: x["amount"] / 1e6)})[
+            ["date", col_m_uah, "source"]
+        ]
+    )
+    return df_out

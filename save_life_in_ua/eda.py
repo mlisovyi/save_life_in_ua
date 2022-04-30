@@ -18,13 +18,7 @@ df_out = sliu.process_date(df_out)
 
 # %%
 pd.set_option("max_colwidth", 200)
-col_m_uah = "amount, millions UAH"
-(
-    df_in[df_in["date"] >= pd.to_datetime("2022-01-01")]
-    .nlargest(20, columns="amount")
-    .reset_index(drop=True)
-    .assign(**{col_m_uah: (lambda x: x["amount"] / 1e6)})[["date", col_m_uah, "source"]]
-)
+sliu.get_top_N_donations(df_in)
 
 # %%
 # aggregate and transform values into millions
