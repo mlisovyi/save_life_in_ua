@@ -4,32 +4,28 @@
 name: Python application
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '52 19 * * *'
 
 permissions:
   contents: read
 
 jobs:
-  test:
+  EDA:
 
     runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.10
+    - name: Set up Python 3
       uses: actions/setup-python@v3
       with:
         python-version: "3.8"
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
-    - name: Lint with pylint
-      run: |
-        find save_life_in_ua -type f -name "*.py" | xargs pylint -E -r y
-    - name: Test with pytest
+        pip install -r requirements/requirements_app.txt
+    - name: Run EDA
       run: |
         export PYTHONPATH=$PWD:$PYTHONPATH
-        pytest
+        python save_life_in_ua/eda.py
