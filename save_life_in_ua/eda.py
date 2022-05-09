@@ -7,7 +7,7 @@ import save_life_in_ua as sliu
 
 # %%
 file_data = Path("data/militarnyy_2022_tmp.xlsb")
-# sliu.download_data(file_data)
+sliu.download_data(file_data)
 
 # %%
 df_in, df_out = sliu.read_and_preprocess_data(file_data)
