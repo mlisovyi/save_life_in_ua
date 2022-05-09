@@ -1,5 +1,4 @@
 # %%
-import datetime as dt
 from pathlib import Path
 
 import pandas as pd
@@ -32,4 +31,3 @@ sliu.plot_cum_daily_inout(df_in_date, df_out_date, date_start="2022-02-01")
 s_final = sliu.process_type_of_expenses(df_out["type"])
 
 sliu.plot_word_cloud_expenses(s_final)
-

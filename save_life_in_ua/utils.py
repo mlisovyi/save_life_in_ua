@@ -9,10 +9,10 @@ def get_daily_total(df: pd.DataFrame) -> pd.Series:
 def process_type_of_expenses(s: pd.Series) -> pd.DataFrame:
     pattern = r"(?<!\S)[^а-яА-Я\s]+(?!\S)"
     s_final = (
-        s.str.replace("\n", "")
-        .str.replace(pattern, "")
-        .str.replace(r"\d*шт", "")
-        .str.replace(",.", "")
+        s.str.replace("\n", "", regex=False)
+        .str.replace(pattern, "", regex=True)
+        .str.replace(r"\d*шт", "", regex=True)
+        .str.replace(",.", "", regex=False)
         .str.strip()
     )
     return s_final
