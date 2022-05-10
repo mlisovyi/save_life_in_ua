@@ -1,8 +1,10 @@
+import datetime as dt
+from pathlib import Path
 from typing import Optional
+
 import matplotlib.pyplot as plt
 import pandas as pd
 from wordcloud import WordCloud
-import datetime as dt
 
 
 def add_y_grid_lines() -> None:
@@ -26,7 +28,10 @@ def preprocess_before_plotting(
 
 
 def plot_daily_inout(
-    s_in: pd.Series, s_out: pd.Series, date_start: Optional[str] = None
+    s_in: pd.Series,
+    s_out: pd.Series,
+    date_start: Optional[str] = None,
+    fout: Optional[Path] = None,
 ) -> None:
     plt.figure(figsize=(12, 5))
     _s_in = preprocess_before_plotting(s_in, date_start)
@@ -39,10 +44,17 @@ def plot_daily_inout(
     add_war_start_line()
     plt.legend()
     plt.tight_layout()
+    if fout:
+        fout.parent.mkdir(exist_ok=True, parents=True)
+        plt.savefig(fout)
+    plt.show()
 
 
 def plot_cum_daily_inout(
-    s_in: pd.Series, s_out: pd.Series, date_start: Optional[str] = None
+    s_in: pd.Series,
+    s_out: pd.Series,
+    date_start: Optional[str] = None,
+    fout: Optional[Path] = None,
 ) -> None:
     _, axs = plt.subplots(
         2, 1, figsize=(12, 7), sharex="col", gridspec_kw={"height_ratios": [2.5, 1]}
@@ -71,6 +83,10 @@ def plot_cum_daily_inout(
     add_war_start_line()
     plt.legend()
     plt.tight_layout()
+    if fout:
+        fout.parent.mkdir(exist_ok=True, parents=True)
+        plt.savefig(fout)
+    plt.show()
 
 
 def plot_word_cloud_expenses(df_expense_counts: pd.DataFrame) -> None:
