@@ -53,8 +53,8 @@ def read_and_preprocess_data(file_data: Path) -> Tuple[pd.DataFrame, pd.DataFram
     df_in = process_date(df_in)
     df_out = process_date(df_out)
 
-    max_date_in = df_in["date"].max()
-    max_date_out = df_out["date"].max()
+    max_date_in = df_in["date"].max().strftime('%Y/%m/%d')
+    max_date_out = df_out["date"].max().strftime('%Y/%m/%d')
     print(f"Latest date in the data: {max_date_in=}, {max_date_out=}")
 
     return df_in, df_out

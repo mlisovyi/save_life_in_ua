@@ -15,7 +15,8 @@ df_in, df_out = sliu.read_and_preprocess_data(file_data)
 # %%
 # Largest donations
 pd.set_option("max_colwidth", 200)
-sliu.get_top_N_donations(df_in)
+df_top_n = sliu.get_top_N_donations(df_in)
+df_top_n
 
 # %%
 # aggregate and transform values into millions
@@ -39,3 +40,6 @@ sliu.plot_cum_daily_inout(
 s_final = sliu.process_type_of_expenses(df_out["type"])
 
 sliu.plot_word_cloud_expenses(s_final)
+
+# %%
+sliu.generate_markdown(df_top_n)
