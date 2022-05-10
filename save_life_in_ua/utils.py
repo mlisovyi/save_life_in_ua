@@ -1,4 +1,6 @@
 import pandas as pd
+from pathlib import Path
+import datetime as dt
 
 
 def get_daily_total(df: pd.DataFrame) -> pd.Series:
@@ -36,3 +38,16 @@ def get_top_N_donations(df: pd.DataFrame) -> pd.DataFrame:
         ]
     )
     return df_out
+
+
+def generate_markdown(df_full_n: pd.DataFrame) -> None:
+    template_md = Path("docs/README.template")
+    out_md = template_md.parent / f"{template_md.stem}.md"
+    with open(str(template_md), "r") as template_file:
+        template = template_file.read()
+        docs = template.format(
+            LARGEST_DONATIONS=df_full_n.to_markdown(),
+            DATE=dt.datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
+        )
+    with open(str(out_md), "w") as out_file:
+        out_file.write(docs)
