@@ -24,8 +24,15 @@ df_out_date = sliu.get_daily_total(df_out)
 
 # %%
 # plot daily sums
-sliu.plot_daily_inout(df_in_date, df_out_date, date_start="2022-02-01")
-sliu.plot_cum_daily_inout(df_in_date, df_out_date, date_start="2022-02-01")
+sliu.plot_daily_inout(
+    df_in_date, df_out_date, date_start="2022-02-01", fout=Path("docs/figs/daily.png")
+)
+sliu.plot_cum_daily_inout(
+    df_in_date,
+    df_out_date,
+    date_start="2022-02-01",
+    fout=Path("docs/figs/daily_cum.png"),
+)
 # %%
 # plot word counts in the
 s_final = sliu.process_type_of_expenses(df_out["type"])
