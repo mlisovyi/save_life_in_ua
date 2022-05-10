@@ -7,7 +7,7 @@ import save_life_in_ua as sliu
 
 # %%
 file_data = Path("data/militarnyy_2022_tmp.xlsb")
-# sliu.download_data(file_data)
+sliu.download_data(file_data)
 
 # %%
 df_in, df_out = sliu.read_and_preprocess_data(file_data)
@@ -23,15 +23,16 @@ df_in_date = sliu.get_daily_total(df_in)
 df_out_date = sliu.get_daily_total(df_out)
 
 # %%
+dir_out = Path("docs/figs/")
 # plot daily sums
 sliu.plot_daily_inout(
-    df_in_date, df_out_date, date_start="2022-02-01", fout=Path("docs/figs/daily.png")
+    df_in_date, df_out_date, date_start="2022-02-01", fout=dir_out / "daily.png"
 )
 sliu.plot_cum_daily_inout(
     df_in_date,
     df_out_date,
     date_start="2022-02-01",
-    fout=Path("docs/figs/daily_cum.png"),
+    fout=dir_out / "daily_cum.png",
 )
 # %%
 # plot word counts in the
