@@ -13,4 +13,8 @@ _Note reduction of donations with the time going :(_
 ![](figs/daily_cum.png)
 _Total accumulated donations (orange) and expenses (blue) as well as the reserve (red)._
 
+## Largest donations
 
+{LARGEST_DONATIONS}
+
+<p><small>Generated on {DATE}.</small></p>
