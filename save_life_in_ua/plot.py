@@ -59,17 +59,8 @@ def plot_cum_daily_inout(
     _, axs = plt.subplots(
         2, 1, figsize=(12, 7), sharex="col", gridspec_kw={"height_ratios": [2.5, 1]}
     )
-    # top figure with the cumulative distribution of donations and expenses
-    plt.sca(axs[0])
     _s_in = preprocess_before_plotting(s_in, date_start).cumsum()
-    _s_in.plot.line("-", marker=".", label="Income")
     _s_out = preprocess_before_plotting(s_out, date_start).cumsum()
-    _s_out.plot.line("-", marker=".", label="Expenses")
-    plt.xlabel("Date")
-    plt.ylabel("Cumulative each day, millions UAH")
-    add_y_grid_lines()
-    add_war_start_line()
-    plt.legend()
     # bottom figure with the savings
     plt.sca(axs[1])
     df_inout = pd.concat([_s_in.rename("in"), _s_out.rename("out")], axis=1)
@@ -83,6 +74,15 @@ def plot_cum_daily_inout(
     add_war_start_line()
     plt.legend()
     plt.tight_layout()
+    # top figure with the cumulative distribution of donations and expenses
+    plt.sca(axs[0])
+    _s_in.plot.line("-", marker=".", label="Income")
+    _s_out.plot.line("-", marker=".", label="Expenses")
+    plt.xlabel("Date")
+    plt.ylabel("Cumulative each day, millions UAH")
+    add_y_grid_lines()
+    add_war_start_line()
+    plt.legend()
     if fout:
         fout.parent.mkdir(exist_ok=True, parents=True)
         plt.savefig(fout)
