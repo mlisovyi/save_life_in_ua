@@ -6,7 +6,7 @@ name: Scheduled runs
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '55 * * * *'
+    - cron:  '15 * * * *'
 
 permissions:
   contents: read
@@ -20,6 +20,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
         ref: ${{ github.head_ref }}
+        token: ${{ secrets.PAT }}
     - name: Set up Python 3
       uses: actions/setup-python@v3
       with:
