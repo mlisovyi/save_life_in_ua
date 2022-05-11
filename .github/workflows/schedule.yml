@@ -18,6 +18,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
     - name: Set up Python 3
       uses: actions/setup-python@v3
       with:
@@ -29,3 +31,14 @@ jobs:
       run: |
         export PYTHONPATH=$PWD:$PYTHONPATH
         python save_life_in_ua/eda.py
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Apply php-cs-fixer changes
+        file_pattern: docs/
+        branch: gh-pages
+    - name: "Run if changes have been detected"
+      if: steps.auto-commit-action.outputs.changes_detected == 'true'
+      run: echo "Changes!"
+    - name: "Run if no changes have been detected"
+      if: steps.auto-commit-action.outputs.changes_detected == 'false'
+      run: echo "No Changes!"
