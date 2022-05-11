@@ -27,6 +27,9 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements/requirements_app.txt
+    - name: Check datetime
+      run: |
+        date
     - name: Run EDA
       run: |
         export PYTHONPATH=$PWD:$PYTHONPATH
