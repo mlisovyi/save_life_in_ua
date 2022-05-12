@@ -43,9 +43,9 @@ jobs:
       # with:
       #   # ref: gh-pages
       #   token: ${{ secrets.PAT }}
-    - name: Pull main
-      run: |
-        git pull origin gh-pages -s ours
+    # - name: Pull main
+    #   run: |
+    #     git pull origin gh-pages -s ours
     - name: Set up Python 3
       uses: actions/setup-python@v3
       with:
