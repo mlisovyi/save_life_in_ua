@@ -1,42 +1,41 @@
-# save_life_in_ua
-EDA of the donations and expenses to "Повернись Живим" ("Come back alive"/"Save life in ua"):
-<https://www.comebackalive.in.ua/>
+# Statistics of "Come back alive"
 
-The main analysis is in the `save_life_in_ua/eda.py` script.
+Please donate to the Ukrainian army at https://www.comebackalive.in.ua/
 
-## Analysis results
+## History of donations and expenses
 
-The main analysis is scheduled to run regularly in the CI/CD pipeline.
-As outcome the markdown `docs/README.md` file is updated and the updated version
-is pushed to the `gh-pages` branches, which in turn is served as GitHub pages at
-<https://mlisovyi.github.io/save_life_in_ua/>.
+![](figs/daily.png)
+_Daily total donations since February 2022._
+_Note large increase in the donations (orange line) after the start of the war on 24 Febraury 2022._
+_Note reduction of donations with the time going :(_ 
 
-```mermaid
-graph TD;
-GitHub_Actions -- execute_on_schedule --> save_life_in_ua/eda.py;
-save_life_in_ua/eda.py --> docs/README.md;
-docs/README.md -- push_results_to_branch --> gh_pages;
-gh_pages -- transform_to_html_and_deploy --> https://mlisovyi.github.io/save_life_in_ua/;
-;
-```
 
-As a result of this automation, the user has access to up-to-date information
-without needing to have a python, environment and the analysis repository installed.
+![](figs/daily_cum.png)
+_Total accumulated donations (orange) and expenses (blue) as well as the reserve (red)._
 
-### Installation
+## Largest donations
 
-Clone the repository from GitHub:
+|    | date                |   amount, millions UAH | source                                                                                      |
+|---:|:--------------------|-----------------------:|:--------------------------------------------------------------------------------------------|
+|  0 | 2022-04-19 00:00:00 |                88.9366 | ДП ДГЗП "Спецтехноекспорт"                                                                  |
+|  1 | 2022-04-19 00:00:00 |                88.2152 | ДП ДГЗП "Спецтехноекспорт"                                                                  |
+|  2 | 2022-03-01 00:00:00 |                85.4671 | Недоговірні платежі (Монобанк)                                                              |
+|  3 | 2022-03-02 00:00:00 |                66.8974 | Благодійна допомога війсковослужбовцям  ТОВ "ФК "ЄДИНИЙ ПРОСТІР"                            |
+|  4 | 2022-02-28 00:00:00 |                54.15   | Недоговірні платежі (Монобанк) Приняті платежі згідно реєстру №__povernuczhivum_v.csv       |
+|  5 | 2022-03-02 00:00:00 |                40.4936 | Приняті платежі згідно реєстру №314106332_20220302_povernuczhivum_20220301v1.csv (Монобанк) |
+|  6 | 2022-02-28 00:00:00 |                27.8196 | Недоговірні платежі (Монобанк) Приняті платежі згідно реєстру №__povernuczhivum_v.csv       |
+|  7 | 2022-02-25 00:00:00 |                24.1731 | Недоговірні платежі (Монобанк)                                                              |
+|  8 | 2022-02-28 00:00:00 |                21.2154 | Недоговірні платежі (Монобанк) Приняті платежі згідно реєстру №__povernuczhivum_v.csv       |
+|  9 | 2022-03-07 00:00:00 |                20.1014 | ТОВ "ФК "ЄДИНИЙ ПРОСТІР"                                                                    |
+| 10 | 2022-03-03 00:00:00 |                18.821  | Недоговірні платежі (Монобанк) Приняті платежі згідно реєстру №__povernuczhivum_vcsv        |
+| 11 | 2022-03-03 00:00:00 |                18.821  | Недоговірні платежі (Монобанк) Приняті платежі згідно реєстру №__povernuczhivum_vcsv        |
+| 12 | 2022-03-03 00:00:00 |                16.3537 | ТОВ "ФК "ЄДИНИЙ ПРОСТІР" Благодійна допомога війсковослужбовцям                             |
+| 13 | 2022-03-03 00:00:00 |                16.3537 | ТОВ "ФК "ЄДИНИЙ ПРОСТІР" Благодійна допомога війсковослужбовцям                             |
+| 14 | 2022-02-25 00:00:00 |                15      | ТОВ ЕРУ ТРЕЙДІНГ                                                                            |
+| 15 | 2022-03-04 00:00:00 |                14.9056 | Недоговірні платежі (Монобанк) Приняті платежі згідно реєстру №__povernuczhivum_vcsv        |
+| 16 | 2022-03-08 00:00:00 |                12.2681 | Приняті платежі згідно реєстру №314994018_20220309_povernuczhivum_20220304v1.csv            |
+| 17 | 2022-03-21 00:00:00 |                11.8493 | ТОВ "ФК "ЄДИНИЙ ПРОСТІР"                                                                    |
+| 18 | 2022-03-04 00:00:00 |                10.6002 | ТОВ "ФК "ЄДИНИЙ ПРОСТІР" Благодійна допомога війсковослужбовцям                             |
+| 19 | 2022-03-24 00:00:00 |                10.3349 | Монобанк, платежі згідно реєстру №319378437_20220324                                        |
 
-```bash
-git clone https://github.com/mlisovyi/save_life_in_ua.git
-```
-
-For execution one has to install relevant python dependencies using `pip`:
-
-```bash
-pip install -r requirements/requirements_app.txt
-```
-
-The code has been checked to run and is tests in CI/CD using **python 3.8**.
-It is strongly recommended to use some virtual environment with dedicated python installation,
-e.g. `conda`, `poetry`, `pipenv`, etc.
+<p><small>Generated on 2022/05/16 19:38:45.</small></p>
