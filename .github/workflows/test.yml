@@ -13,69 +13,23 @@ permissions:
   contents: read
 
 jobs:
-  # test:
-
-  #   runs-on: ubuntu-20.04
-
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Set up Python 3.10
-  #     uses: actions/setup-python@v3
-  #     with:
-  #       python-version: "3.8"
-  #   - name: Install dependencies
-  #     run: |
-  #       pip install -r requirements.txt
-  #   - name: Lint with pylint
-  #     run: |
-  #       find save_life_in_ua -type f -name "*.py" | xargs pylint -E -r y
-  #   - name: Test with pytest
-  #     run: |
-  #       export PYTHONPATH=$PWD:$PYTHONPATH
-  #       pytest
-
-  EDA:
+  test:
 
     runs-on: ubuntu-20.04
-    permissions:
-      contents: write
 
     steps:
     - uses: actions/checkout@v3
-      # with:
-      #   # ref: gh-pages
-      #   token: ${{ secrets.PAT }}
-    # - name: Pull main
-    #   run: |
-    #     git pull origin gh-pages -s ours
-    - name: Set up Python 3
+    - name: Set up Python 3.8
       uses: actions/setup-python@v3
       with:
         python-version: "3.8"
     - name: Install dependencies
       run: |
-        pip install -r requirements/requirements_app.txt
-    - name: Check datetime
+        pip install -r requirements.txt
+    - name: Lint with pylint
       run: |
-        date
-    - name: Run EDA
+        find save_life_in_ua -type f -name "*.py" | xargs pylint -E -r y
+    - name: Test with pytest
       run: |
         export PYTHONPATH=$PWD:$PYTHONPATH
-        python save_life_in_ua/eda.py
-    - name: Deploy pages 🚀
-      uses: JamesIves/github-pages-deploy-action@v4.3.3
-      with:
-        branch: gh-pages # The branch the action should deploy to.
-        folder: docs # The folder the action should deploy.
-    # - uses: stefanzweifel/git-auto-commit-action@v4
-    #   with:
-    #     commit_message: Apply php-cs-fixer changes
-    #     file_pattern: docs/
-    #     branch: gh-pages
-    # - name: "Run if changes have been detected"
-    #   if: steps.auto-commit-action.outputs.changes_detected == 'true'
-    #   run: echo "Changes!"
-    # - name: "Run if no changes have been detected"
-    #   if: steps.auto-commit-action.outputs.changes_detected == 'false'
-    #   run: echo "No Changes!"
-    
+        pytest
