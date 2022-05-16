@@ -45,8 +45,9 @@ def generate_markdown(df_full_n: pd.DataFrame) -> None:
     out_md = template_md.parent / f"{template_md.stem}.md"
     with open(str(template_md), "r") as template_file:
         template = template_file.read()
+        df_out = df_full_n.assign(date=df_full_n["date"].dt.date)
         docs = template.format(
-            LARGEST_DONATIONS=df_full_n.to_markdown(),
+            LARGEST_DONATIONS=df_out.to_markdown(floatfmt=".2f", tablefmt="github"),
             DATE=dt.datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
         )
     with open(str(out_md), "w") as out_file:
