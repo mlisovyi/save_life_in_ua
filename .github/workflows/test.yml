@@ -13,32 +13,32 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  # test:
 
-    runs-on: ubuntu-20.04
-    permissions:
-      contents: write
+  #   runs-on: ubuntu-20.04
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.8"
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-    - name: Lint with pylint
-      run: |
-        find save_life_in_ua -type f -name "*.py" | xargs pylint -E -r y
-    - name: Test with pytest
-      run: |
-        export PYTHONPATH=$PWD:$PYTHONPATH
-        pytest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: Set up Python 3.10
+  #     uses: actions/setup-python@v3
+  #     with:
+  #       python-version: "3.8"
+  #   - name: Install dependencies
+  #     run: |
+  #       pip install -r requirements.txt
+  #   - name: Lint with pylint
+  #     run: |
+  #       find save_life_in_ua -type f -name "*.py" | xargs pylint -E -r y
+  #   - name: Test with pytest
+  #     run: |
+  #       export PYTHONPATH=$PWD:$PYTHONPATH
+  #       pytest
 
   EDA:
 
     runs-on: ubuntu-20.04
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v3
