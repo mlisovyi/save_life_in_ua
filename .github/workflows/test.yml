@@ -16,6 +16,8 @@ jobs:
   test:
 
     runs-on: ubuntu-20.04
+    permissions:
+      contents: write,read
 
     steps:
     - uses: actions/checkout@v3
