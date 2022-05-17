@@ -1,6 +1,7 @@
-import pandas as pd
-from pathlib import Path
 import datetime as dt
+from pathlib import Path
+
+import pandas as pd
 
 
 def get_daily_total(df: pd.DataFrame) -> pd.Series:
