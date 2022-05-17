@@ -4,6 +4,7 @@ from typing import Tuple
 import pandas as pd
 import requests
 
+# specific download URL for the financial report of the fund
 URL = "https://onedrive.live.com/download?resid=B0264747CBB7E393!16208&ithint=file%2cxlsx&authkey=!AMSRszH4rLFy_dE"
 
 
