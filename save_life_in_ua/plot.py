@@ -8,16 +8,33 @@ from wordcloud import WordCloud
 
 
 def add_y_grid_lines() -> None:
+    """Add grid lines on the Y axis (=along the X axis)"""
     plt.grid(which="major", axis="y", ls="--")
 
 
 def add_war_start_line() -> None:
+    """Add a vertical line to indicate the start of the war in Ukraine."""
     plt.axvline(x=dt.date(2022, 2, 24), ls="--", c="k", label="Russia's invasion")
 
 
 def preprocess_before_plotting(
     s: pd.Series, date_start: Optional[str] = None
 ) -> pd.Series:
+    """Do preprocessing of the data before plotting the timeseries.
+
+    In particular, all dates before the specified ``date_start`` are aggregated.
+    This allows to zoom into the interesting region if the time range in the data is very broad.
+
+    Args:
+        s (pd.Series): the time series with
+        date_start (Optional[str], optional): the cut-off date in the _"YYYY-MM-DD"_ format.
+            All entries prior to this date are aggregated.
+            Set to `None` to skip aggregation.
+            Defaults to None.
+
+    Returns:
+        pd.Series: pre-processed time-series to be used in plotting
+    """
     s_out = s.copy()
     if date_start:
         date = pd.to_datetime(date_start, format="%Y-%m-%d")
@@ -33,6 +50,17 @@ def plot_daily_inout(
     date_start: Optional[str] = None,
     fout: Optional[Path] = None,
 ) -> None:
+    """Plot a comparison of daily donations (IN) and expenses (OUT).
+
+    Args:
+        s_in (pd.Series): timeseries of daily donations
+        s_out (pd.Series): timeseries of daily expenses
+        date_start (Optional[str], optional): the date prior to which all entries are aggregated.
+            Defaults to None.
+        fout (Optional[Path], optional): file name to dump the resulting plot.
+            Set to `None` to skip file saving.
+            Defaults to None.
+    """
     plt.figure(figsize=(12, 5))
     _s_in = preprocess_before_plotting(s_in, date_start)
     _s_in.plot.line("-", marker=".", label="Income")
@@ -56,6 +84,17 @@ def plot_cum_daily_inout(
     date_start: Optional[str] = None,
     fout: Optional[Path] = None,
 ) -> None:
+    """Plot a comparison of cumulative donations (IN) and expenses (OUT).
+
+    Args:
+        s_in (pd.Series): timeseries of daily donations
+        s_out (pd.Series): timeseries of daily expenses
+        date_start (Optional[str], optional): the date prior to which all entries are aggregated.
+            Defaults to None.
+        fout (Optional[Path], optional): file name to dump the resulting plot.
+            Set to `None` to skip file saving.
+            Defaults to None.
+    """
     _, axs = plt.subplots(
         2, 1, figsize=(12, 7), sharex="col", gridspec_kw={"height_ratios": [2.5, 1]}
     )
@@ -90,6 +129,11 @@ def plot_cum_daily_inout(
 
 
 def plot_word_cloud_expenses(df_expense_counts: pd.DataFrame) -> None:
+    """Plot word count cloud
+
+    Args:
+        df_expense_counts (pd.DataFrame): individual entries to be counted and plotted.
+    """
     wc = WordCloud(width=600, height=400, collocations=False, background_color="white")
     wc = wc.generate_from_frequencies(df_expense_counts.value_counts().to_dict())
     plt.imshow(wc)
