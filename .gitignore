@@ -1,5 +1,6 @@
 # final report
 docs/README.md
+docs/figs/*
 # IDE
 .vscode
 # any local data
