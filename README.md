@@ -38,4 +38,4 @@ _Total accumulated donations (orange) and expenses (blue) as well as the reserve
 | 18 | 2022-03-04 |                  10.60 | ТОВ "ФК "ЄДИНИЙ ПРОСТІР" Благодійна допомога війсковослужбовцям                             |
 | 19 | 2022-03-24 |                  10.33 | Монобанк, платежі згідно реєстру №319378437_20220324                                        |
 
-<p><small>Generated on 2022/06/02 20:30:01.</small></p>
+<p><small>Generated on 2022/06/03 20:29:47.</small></p>
